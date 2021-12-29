@@ -3,7 +3,7 @@ const app=express()
 const mongoose=require('mongoose')
 const Friendsmodel = require('./model/friends.jsx')
 const cors=require('cors')
-require('dotenv').config()he
+require('dotenv').config()
 
 app.use(cors())
 app.use(express.json())
@@ -37,6 +37,6 @@ mongoose.connect('mongodb+srv://kelvin:salvation22@cluster0.iaa1e.mongodb.net/te
 })
 const port=process.env.PORT || 5000
 
-app.listen(port,()=>{
+app.listen(process.env.PORT || 5000,()=>{
     console.log(`connection is running on ${port}`)
 })
