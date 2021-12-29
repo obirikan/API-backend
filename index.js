@@ -32,7 +32,7 @@ app.post('/add', async (req,res)=>{
     await friend.save()
     res.send('ok sent')
 })
-mongoose.connect('mongodb+srv://kelvin:salvation22@cluster0.iaa1e.mongodb.net/test',{
+mongoose.connect('mongodb+srv://kelvin:salvation22@cluster0.iaa1e.mongodb.net/test?retryWrites=true&w=majority',{
     useNewUrlParser:true
 })
 const port=process.env.PORT || 5000
