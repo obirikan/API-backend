@@ -1,21 +1,48 @@
 const mongoose=require('mongoose')
 
-const Friendschema=new mongoose.Schema({
-    name:{
+//PRODUCTSCHEMA
+const Productschema=new mongoose.Schema({
+    productName:{
     type:String,
     required:true,
-        },
-    url:{
+    },
+    productDesc:{
     type:String,
     required:true  
     },
-    description:{
+    productCategory:{
     type:String,
-    required:false 
+    required:true
+    },
+    productPrice:{
+    type:Number,
+    required:true,
+    },
+    productImage:{
+    type:String,
+    required:true,
     }
 
 })
 
-const Friendsmodel=mongoose.model('friends',Friendschema);
+//CATEGORYSCHEMA
+const Categoryschema=new mongoose.Schema({
+    categoryName:{
+    type:String,
+    required:true,
+    },
+    categoryDesc:{
+    type:String,
+    required:true  
+    },
+    categoryImage:{
+    type:String,
+    required:true
+    },
+})
 
-module.exports=Friendsmodel
+const Product=mongoose.model('products',Productschema);
+const Category=mongoose.model('category',Categoryschema);
+
+module.exports=Product;
+module.exports=Category 
