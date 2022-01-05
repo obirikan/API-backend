@@ -42,7 +42,7 @@ const Categoryschema=new mongoose.Schema({
 })
 
 const Product=mongoose.model('products',Productschema);
-const Category=mongoose.model('categories',Categoryschema);
+const Category=mongoose.model('category',Categoryschema);
 
 module.exports=Product;
 module.exports=Category 

@@ -32,7 +32,7 @@ app.post('/addProducts', async (req,res)=>{
     let productPrice=req.body.productPrice
     let productImage=req.body.productImage
 
-    res.send('addedproducts')
+    res.send('products')
     const product1=new Product({
         productName:productName,
         productDesc:productDesc,
@@ -58,7 +58,7 @@ app.get('/viewCategory',async (req,res)=>{
      let categoryDesc=req.body.categoryDesc
      let categoryImage=req.body.categoryImage
  
-     res.send('addedcategory')
+     res.send('category')
      const category1=new Category({
          categoryName:categoryName,
          categoryDesc:categoryDesc,
