@@ -1,7 +1,7 @@
 const express=require('express')
 const app=express()
 const mongoose=require('mongoose')
-const Product= require('./model/friends.jsx')
+const Product= require('./model/friends2.jsx')
 const Category= require('./model/friends.jsx')
 const cors=require('cors')
 require('dotenv').config() 
