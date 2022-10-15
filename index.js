@@ -15,7 +15,7 @@ app.use(express.json())
 //     res.send('deleted')
 // })
 
-//PRODUCT___SECTION
+//PRODUCT__SECTION
 app.get('/viewProducts',async (req,res)=>{
    Product.find({},(error,result)=>{
        if(error){
