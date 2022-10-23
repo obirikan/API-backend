@@ -15,7 +15,7 @@ app.use(express.json())
 //     res.send('deleted')
 // })
 
-//PRODUCT__SECTION
+//PRODUCT SECTION
 app.get('/viewProducts',async (req,res)=>{
    Product.find({},(error,result)=>{
        if(error){
@@ -43,7 +43,7 @@ app.post('/addProducts', async (req,res)=>{
     await product1.save()
     res.send('ok sent')
 })
-//CATEGORY__SECTION
+//CATEGORY SECTION
 app.get('/viewCategory',async (req,res)=>{
     Category.find({},(error,result)=>{
         if(error){
