@@ -9,12 +9,6 @@ require('dotenv').config()
 app.use(cors())
 app.use(express.json())
 
-// app.delete('/delete/:id',async (req,res)=>{
-//     const id=req.params.id
-//     await Friendsmodel.findByIdAndRemove(id).exec();
-//     res.send('deleted')
-// })
-
 //PRODUCT SECTION
 app.get('/viewProducts',async (req,res)=>{
    Product.find({},(error,result)=>{
