@@ -9,58 +9,128 @@ require('dotenv').config()
 app.use(cors())
 app.use(express.json())
 
-//PRODUCT SECTION
-app.get('/viewProducts',async (req,res)=>{
-   Product.find({},(error,result)=>{
-       if(error){
-           res.send(error)
-       }else{
-           res.send(result)
-       }
-   })
-})
-app.post('/addProducts', async (req,res)=>{
-    let productName=req.body.productName
-    let productDesc=req.body.productDesc
-    let productCategory=req.body.productCategory
-    let productPrice=req.body.productPrice
-    let productImage=req.body.productImage
+// View all products
+app.get('/viewProducts', async (req, res) => {
+  try {
+    const products = await Product.find({});
+    res.send(products);
+  } catch (error) {
+    res.status(500).send(error);
+  }
+});
 
-    res.send('products')
-    const product1=new Product({
-        productName:productName,
-        productDesc:productDesc,
-        productCategory:productCategory,
-        productPrice:productPrice,
-        productImage: productImage,
-    })
-    await product1.save()
-    res.send('ok sent')
-})
+// Add a new product
+app.post('/addProduct', async (req, res) => {
+  try {
+    const { productName, productDesc, productCategory, productPrice, productImage } = req.body;
+    const product = new Product({
+      productName,
+      productDesc,
+      productCategory,
+      productPrice,
+      productImage
+    });
+    await product.save();
+    res.status(201).send(product);
+  } catch (error) {
+    res.status(400).send(error);
+  }
+});
+
+// Delete a product
+app.delete('/deleteProduct/:id', async (req, res) => {
+  try {
+    const deletedProduct = await Product.findByIdAndDelete(req.params.id);
+    if (!deletedProduct) {
+      res.status(404).send({ message: 'Product not found.' });
+    } else {
+      res.send({ message: 'Product deleted successfully.' });
+    }
+  } catch (error) {
+    res.status(500).send(error);
+  }
+});
+
+// Update a product
+app.put('/updateProduct/:id', async (req, res) => {
+  try {
+    const { productName, productDesc, productCategory, productPrice, productImage } = req.body;
+    const updatedProduct = await Product.findByIdAndUpdate(
+      req.params.id,
+      {
+        productName,
+        productDesc,
+        productCategory,
+        productPrice,
+        productImage
+      },
+      { new: true }
+    );
+    if (!updatedProduct) {
+      res.status(404).send({ message: 'Product not found.' });
+    } else {
+      res.send(updatedProduct);
+    }
+  } catch (error) {
+    res.status(500).send(error);
+  }
+});
+
 //CATEGORY SECTION
-app.get('/viewCategory',async (req,res)=>{
-    Category.find({},(error,result)=>{
-        if(error){
-            res.send(error)
-        }else{
-            res.send(result)
-        }
-    })
- })
- app.post('/addCategory', async (req,res)=>{
-     let categoryName=req.body.categoryName
-     let categoryDesc=req.body.categoryDesc
-     let categoryImage=req.body.categoryImage
- 
-     res.send('category')
-     const category1=new Category({
-         categoryName:categoryName,
-         categoryDesc:categoryDesc,
-         categoryImage:categoryImage,
-     })
-     await category1.save()
-     res.send('ok sent')
- })
+
+// View all categories
+app.get('/viewCategories', async (req, res) => {
+  try {
+    const categories = await Category.find({});
+    res.send(categories);
+  } catch (error) {
+    res.status(500).send(error);
+  }
+});
+
+// Add a new category
+app.post('/addCategory', async (req, res) => {
+  try {
+    const { categoryName, categoryDesc, categoryImage } = req.body;
+    const category = new Category({
+      categoryName,
+      categoryDesc,
+      categoryImage
+    });
+    await category.save();
+    res.status(201).send(category);
+  } catch (error) {
+    res.status(400).send(error);
+  }
+});
+
+// Delete a category
+app.delete('/deleteCategory/:id', async (req, res) => {
+  try {
+    const deletedCategory = await Category.findByIdAndDelete(req.params.id);
+    if (!deletedCategory) {
+      res.status(404).send({ message: 'Category not found.' });
+    } else {
+      res.send({ message: 'Category deleted successfully.' });
+    }
+  } catch (error) {
+    res.status(500).send(error);
+  }
+});
+
+// Update a category
+app.put('/updateCategory/:id', async (req, res) => {
+  try {
+    const { categoryName, categoryDesc, categoryImage } = req.body;
+    const updatedCategory = await Category.findByIdAndUpdate(
+      req.params.id,
+      {
+        categoryName,
+        categoryDesc,
+        categoryImage
+      },
+      { new: true }
+    );
 //DATABASE____CONNECTION
 mongoose.connect('mongodb+srv://kelvin:salvation22@cluster0.iaa1e.mongodb.net/afram',{
     useNewUrlParser:true
